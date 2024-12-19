@@ -3,14 +3,16 @@ import { Box, Button, Stack } from "@mui/material";
 import Header from "./components/Header";
 import QuestionInput from "./components/QuestionInput";
 import Footer from "./components/Footer";
+import LandingPage from "./components/SummaryOutput";
 
 const PageHome = () => {
-  const [step, setStep] = useState(0); // Form adımlarını yönetmek için.
+  const [step, setStep] = useState(0); // Form adımlarını yönetmek için
   const [data, setData] = useState({
     twitter: "",
     metamask: "",
     telegram: "",
   });
+  const [submitted, setSubmitted] = useState(false); // Formun tamamlandığını takip etmek için
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,6 +40,28 @@ const PageHome = () => {
       placeholder: "Enter a number",
     },
   ];
+
+  const handleFinish = () => {
+    setSubmitted(true);
+  };
+
+  const stats = {
+    topStats: [
+      { count: 3, label: "Metamask Accounts" },
+      { count: 3, label: "Twitter Accounts" },
+      { count: 3, label: "Telegram Accounts" },
+    ],
+    bottomStats: [
+      { count: parseInt(data.twitter), label: "Twitter Accounts" },
+      { count: parseInt(data.metamask), label: "Metamask Accounts" },
+      { count: parseInt(data.telegram), label: "Telegram Accounts" },
+      { count: 17, label: "Unique Users" },
+    ],
+  };
+
+  if (submitted) {
+    return <LandingPage stats={stats} />;
+  }
 
   return (
     <Box
@@ -78,7 +102,7 @@ const PageHome = () => {
         </Button>
         <Button
           variant="contained"
-          onClick={nextStep}
+          onClick={step === questions.length - 1 ? handleFinish : nextStep}
           disabled={!data[questions[step].key]}
           sx={{
             backgroundColor: "#28C662",
