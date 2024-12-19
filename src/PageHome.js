@@ -1,7 +1,44 @@
-import React from "react";
-import { Box, Button, Typography, TextField, Stack } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Stack } from "@mui/material";
+import Header from "./components/Header";
+import QuestionInput from "./components/QuestionInput";
+import Footer from "./components/Footer";
 
 const PageHome = () => {
+  const [step, setStep] = useState(0); // Form adımlarını yönetmek için.
+  const [data, setData] = useState({
+    twitter: "",
+    metamask: "",
+    telegram: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const nextStep = () => setStep((prev) => prev + 1);
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
+
+  // Soruların listesi
+  const questions = [
+    {
+      key: "twitter",
+      question: "How many Twitter(X) accounts do you have?",
+      placeholder: "Enter a number",
+    },
+    {
+      key: "metamask",
+      question: "How many Metamask accounts do you have?",
+      placeholder: "Enter a number",
+    },
+    {
+      key: "telegram",
+      question: "How many Telegram accounts do you have?",
+      placeholder: "Enter a number",
+    },
+  ];
+
   return (
     <Box
       sx={{
@@ -15,77 +52,43 @@ const PageHome = () => {
         padding: "20px",
       }}
     >
-      {/* Üst Başlık */}
-      <Box component="span" sx={{ fontWeight: "bold" }}>
-        Leg1t
-      </Box>
-      <Typography variant="h4" sx={{ mb: 4 }}>
-        <Box component="span" sx={{ fontWeight: "bold" }}>
-          Who are
-        </Box>{" "}
-        <Box component="span" sx={{ color: "#28C662", fontWeight: "bold" }}>
-          you?
-        </Box>
-      </Typography>
-
-      {/* Soru ve Giriş Alanı */}
-      <Typography variant="subtitle1" sx={{ mb: 2 }}>
-        How many Twitter(X) accounts do you have?
-      </Typography>
-      <TextField
-        variant="outlined"
-        placeholder="Enter a number"
-        InputProps={{
-          sx: {
-            backgroundColor: "#111",
-            color: "#fff",
-            borderColor: "#333",
-            borderRadius: "8px",
-          },
-        }}
-        sx={{ width: "200px", mb: 4 }}
+      <Header />
+      <QuestionInput
+        question={questions[step].question}
+        placeholder={questions[step].placeholder}
+        value={data[questions[step].key]}
+        handleChange={(e) =>
+          handleInputChange({
+            target: { name: questions[step].key, value: e.target.value },
+          })
+        }
       />
-
-      {/* Butonlar */}
       <Stack direction="row" spacing={2}>
         <Button
           variant="outlined"
+          onClick={prevStep}
           sx={{
             color: "#fff",
             borderColor: "#333",
             ":hover": { borderColor: "#fff" },
           }}
+          disabled={step === 0}
         >
           Back
         </Button>
         <Button
           variant="contained"
+          onClick={nextStep}
+          disabled={!data[questions[step].key]}
           sx={{
             backgroundColor: "#28C662",
             ":hover": { backgroundColor: "#1E9E50" },
           }}
         >
-          Next
+          {step === questions.length - 1 ? "Finish" : "Next"}
         </Button>
       </Stack>
-
-      {/* Alt Bilgiler */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "20px",
-          display: "flex",
-          justifyContent: "space-around",
-          width: "100%",
-          fontSize: "12px",
-          opacity: 0.6,
-        }}
-      >
-        <Typography>176043 Metamask Accounts</Typography>
-        <Typography>100076 Twitter Accounts</Typography>
-        <Typography>100131 Telegram Accounts</Typography>
-        <Typography>17 Unique Users</Typography>
-      </Box>
+      <Footer />
     </Box>
   );
 };
