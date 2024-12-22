@@ -3,7 +3,7 @@ import { Box, Button, Stack } from "@mui/material";
 import Header from "./components/Header";
 import QuestionInput from "./components/QuestionInput";
 import Footer from "./components/Footer";
-import LandingPage from "./components/SummaryOutput";
+import SummaryOutput from "./components/SummaryOutput";
 
 const PageHome = () => {
   const [step, setStep] = useState(0); // Form adımlarını yönetmek için
@@ -20,7 +20,7 @@ const PageHome = () => {
   };
 
   const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
+  const prevStep = () => setStep((prev) => prev - 1);
 
   // Soruların listesi
   const questions = [
@@ -47,14 +47,14 @@ const PageHome = () => {
 
   const stats = {
     topStats: [
-      { count: data.metamask, label: "Metamask Accounts" },
       { count: data.twitter, label: "Twitter Accounts" },
+      { count: data.metamask, label: "Metamask Accounts" },
       { count: data.telegram, label: "Telegram Accounts" },
     ],
   };
 
   if (submitted) {
-    return <LandingPage stats={stats} />;
+    return <SummaryOutput stats={stats} />;
   }
 
   return (
@@ -97,13 +97,16 @@ const PageHome = () => {
         <Button
           variant="contained"
           onClick={step === questions.length - 1 ? handleFinish : nextStep}
-          disabled={!data[questions[step].key]}
           sx={{
-            backgroundColor: "#28C662",
-            ":hover": { backgroundColor: "#1E9E50" },
+            backgroundColor: !data[questions[step].key] ? "#1c894c" : "#4BEA83",
+            ":hover": {
+              backgroundColor: !data[questions[step].key]
+                ? "#1c894c"
+                : "#4BEA83",
+            },
           }}
         >
-          {step === questions.length - 1 ? "Finish" : "Next"}
+          Next
         </Button>
       </Stack>
       <Footer />

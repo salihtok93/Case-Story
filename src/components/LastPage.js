@@ -16,7 +16,6 @@ const LastPage = () => (
       overflow: "hidden",
     }}
   >
-    {/* Hesaplar */}
     <Box
       sx={{
         display: "flex",
@@ -53,7 +52,6 @@ const LastPage = () => (
       ))}
     </Box>
 
-    {/* Unique Users */}
     <Typography
       sx={{
         fontSize: "1.2rem",
@@ -68,7 +66,7 @@ const LastPage = () => (
       sx={{
         fontSize: "3.5rem",
         fontWeight: "bold",
-        color: "#00FF00",
+        color: "#28C662",
         textAlign: "center",
       }}
     >

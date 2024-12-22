@@ -47,7 +47,6 @@ const SummaryOutput = ({ stats }) => {
           LegIt
         </Typography>
 
-        {/* Top Stats */}
         <Grid container spacing={4} justifyContent="center" sx={{ mb: 4 }}>
           {stats.topStats.map((stat, index) => (
             <Grid item key={index}>
@@ -73,7 +72,6 @@ const SummaryOutput = ({ stats }) => {
           ))}
         </Grid>
 
-        {/* Unique Section */}
         <Box sx={{ textAlign: "center", mb: 4 }}>
           <Typography
             variant="subtitle1"
@@ -93,7 +91,6 @@ const SummaryOutput = ({ stats }) => {
           </Typography>
         </Box>
 
-        {/* Waitlist Form */}
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -115,8 +112,17 @@ const SummaryOutput = ({ stats }) => {
             onChange={(e) => setEmail(e.target.value)}
             sx={{
               maxWidth: 400,
-              backgroundColor: "white",
+              backgroundColor: "transparent",
               borderRadius: "50px",
+              input: { color: "white" },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "white",
+                },
+              },
             }}
           />
           <Button
