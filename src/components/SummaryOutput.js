@@ -7,25 +7,33 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import Footer from "./Footer"; // Footer component importu
+import Footer from "./Footer";
+import LastPage from "./LastPage";
 
 const SummaryOutput = ({ stats }) => {
+  const [submitted, setSubmitted] = useState(false); // Formun tamamlandığını takip etmek için
+
+  const handleFinish = () => {
+    setSubmitted(true);
+  };
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Email submitted:", email);
   };
-
+  if (submitted) {
+    return <LastPage />;
+  }
   return (
     <Box
       sx={{
         bgcolor: "black",
-        minHeight: "100vh", // Sayfa boyutunu PageHome ile aynı yapıyoruz
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start", // Üst kısmı düzenlemek için
-        color: "white", // Metin rengini beyaz yaparak görünürlüğü artırıyoruz
+        justifyContent: "flex-start",
+        color: "white",
       }}
     >
       <Container maxWidth="lg">
@@ -34,7 +42,7 @@ const SummaryOutput = ({ stats }) => {
           variant="h3"
           component="h1"
           align="center"
-          sx={{ fontWeight: "bold", color: "white" }} // Logo rengini beyaz yapıyoruz
+          sx={{ fontWeight: "bold", color: "white" }}
         >
           LegIt
         </Typography>
@@ -69,7 +77,7 @@ const SummaryOutput = ({ stats }) => {
         <Box sx={{ textAlign: "center", mb: 4 }}>
           <Typography
             variant="subtitle1"
-            sx={{ color: "rgba(255, 255, 255, 0.7)", mb: 1 }} // Yazı rengini açık yapıyoruz
+            sx={{ color: "rgba(255, 255, 255, 0.7)", mb: 1 }}
           >
             BUT STILL
           </Typography>
@@ -112,6 +120,7 @@ const SummaryOutput = ({ stats }) => {
             }}
           />
           <Button
+            onClick={handleFinish}
             variant="contained"
             type="submit"
             sx={{

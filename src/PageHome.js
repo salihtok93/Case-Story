@@ -47,15 +47,9 @@ const PageHome = () => {
 
   const stats = {
     topStats: [
-      { count: 3, label: "Metamask Accounts" },
-      { count: 3, label: "Twitter Accounts" },
-      { count: 3, label: "Telegram Accounts" },
-    ],
-    bottomStats: [
-      { count: parseInt(data.twitter), label: "Twitter Accounts" },
-      { count: parseInt(data.metamask), label: "Metamask Accounts" },
-      { count: parseInt(data.telegram), label: "Telegram Accounts" },
-      { count: 17, label: "Unique Users" },
+      { count: data.metamask, label: "Metamask Accounts" },
+      { count: data.twitter, label: "Twitter Accounts" },
+      { count: data.telegram, label: "Telegram Accounts" },
     ],
   };
 
