@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button, Stack } from "@mui/material";
-import Header from "./components/Header";
-import QuestionInput from "./components/QuestionInput";
-import Footer from "./components/Footer";
-import SummaryOutput from "./components/SummaryOutput";
+import Header from "../components/Header";
+import QuestionInput from "../components/QuestionInput";
+import Footer from "../components/Footer";
+import SummaryOutput from "./SummaryOutput";
 
 const PageHome = () => {
   const [step, setStep] = useState(0); // Form adımlarını yönetmek için

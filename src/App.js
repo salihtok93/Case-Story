@@ -1,5 +1,5 @@
 import React from "react";
-import PageHome from "./PageHome";
+import PageHome from "./pages/PageHome";
 
 function App() {
   return <PageHome />;

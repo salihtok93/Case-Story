@@ -7,7 +7,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import LastPage from "./LastPage";
 
 const SummaryOutput = ({ stats }) => {
